@@ -25,19 +25,47 @@ int main(int argc, char * argv[])
     {
         saveLog("User did not provide path to the files.");
         saveLog("Creating the test files for user...");
-        //test 1
-        createFile1("test1_file1.bin", 100, 0x55); //1111 1111
-        createFile1("test1_file2.bin", 100, 0x55); //1111 1110
-        //test 2
-        createFile1("test1_file1.bin", 100, 0xFF); //1111 1111
-        createFile1("test1_file2.bin", 100, 0xFE); //1111 1110
-        /*
-            missing function to change 10 bits in the file
-        */
+        //Proba 1
+        bool repeat = true;
 
-        //test 3
-        createFile1("test3_file1.bin",400000000,0x55); 
-        createFile1("test3_file2.bin",400000000,0x50);
+        while (repeat)
+        {
+            std::cout << "Testowanie plikow - Proba/1, Proba/2, Proba/3, Wyjscie z testu/4" << std::endl;
+            int choose;
+            std::cin >> choose;
+            switch (choose) {
+                //Proba 1
+            case 1:
+            {
+                createFile1("test1_proba1.bin", 100, 0x55); //1111 1111
+                createFile1("test1_proba2.bin", 100, 0x55); //1111 1110
+                results = calculateBer("test1_proba1.bin", "test1_proba2.bin");
+                printResult(results);
+                break;
+            }
+            //Proba 2
+            case 2:
+            {
+                createFile1("test2_proba1.bin", 100, 0xFF); //1111 1111
+                createFile1("test2_proba2.bin", 100, 0xFE); //1111 1110
+                results = calculateBer("test2_proba1.bin", "test2_proba2.bin");
+                printResult(results);
+                break;
+            }
+            //Proba3
+            case 3:
+            {
+
+                createFile1("test3_proba1.bin", 400000000, 0x55);
+                createFile1("test3_proba2.bin", 400000000, 0x50);
+                results = calculateBer("test3_proba1.bin", "test3_proba2.bin");
+                printResult(results);
+                break;
+            
+            }
+            }
+
+        }
         saveLog("Test files are prepared");
         saveLog("Re-run with correct arguments ie: ./task_iv_ber.exe test1_file1.bin test1_file2.bin");
     }
